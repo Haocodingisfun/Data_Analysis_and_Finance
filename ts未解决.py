@@ -17,6 +17,7 @@ date2 = list(date)   # type(date2) == list
 quote = quotes.join(pd.DataFrame(list(date), columns=['date',]) , how='outer')  # type(quote) == pandas.core.frame.DataFrame
 quote1 = np.array(quote)  # type(quote1) == numpy.ndarray
 quote2 = list((quote1)   # type(quote2) == list
+	
 '''
 opens = quotes['open']
 closes = quotes['close']
