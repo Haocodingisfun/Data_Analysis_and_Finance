@@ -1,2 +1,2 @@
 # python4finance
-My notes of data analyse and finance.
+My notes of data analysis and finance.
