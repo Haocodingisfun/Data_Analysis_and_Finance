@@ -1,0 +1,605 @@
+Last login: Fri Jul 14 09:39:23 on ttys001
+HF:~ wonderful$ ipython --pylab
+Python 3.6.0 |Anaconda 4.3.0 (x86_64)| (default, Dec 23 2016, 13:19:00) 
+Type "copyright", "credits" or "license" for more information.
+
+IPython 5.1.0 -- An enhanced Interactive Python.
+?         -> Introduction and overview of IPython's features.
+%quickref -> Quick reference.
+help      -> Python's own help system.
+object?   -> Details about 'object', use 'object??' for extra details.
+Using matplotlib backend: MacOSX
+
+In [1]:  2 ** 27
+Out[1]: 134217728
+
+In [2]: -
+  File "<ipython-input-2-0a1f21a34173>", line 1
+    -
+     ^
+SyntaxError: invalid syntax
+
+
+In [3]: _
+Out[3]: 134217728
+
+In [4]: foo = 'bar'
+
+In [5]: foo
+Out[5]: 'bar'
+
+In [6]: _i5
+Out[6]: 'foo'
+
+In [7]: _5
+Out[7]: 'bar'
+
+In [8]: exec_i5
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-8-be78b157103a> in <module>()
+----> 1 exec_i5
+
+NameError: name 'exec_i5' is not defined
+
+In [9]: exec _i5
+  File "<ipython-input-9-479f1f5c9f61>", line 1
+    exec _i5
+           ^
+SyntaxError: Missing parentheses in call to 'exec'
+
+
+In [10]: exec(_i5)
+
+In [11]: foo
+Out[11]: 'bar'
+
+In [12]: exec(_i11)
+
+In [13]: %logstart
+Activating auto-logging. Current session state plus future input saved.
+Filename       : ipython_log.py
+Mode           : rotate
+Output logging : False
+Raw input log  : False
+Timestamping   : False
+State          : active
+
+In [14]: %logstop
+
+In [15]: %run /Users/wonderful/ipython_log.py 
+  File "/Users/wonderful/ipython_log.py", line 4
+    -
+     ^
+SyntaxError: invalid syntax
+
+
+In [16]: %logstart
+Activating auto-logging. Current session state plus future input saved.
+Filename       : ipython_log.py
+Mode           : rotate
+Output logging : False
+Raw input log  : False
+Timestamping   : False
+State          : active
+
+In [17]: !cmd
+/bin/bash: cmd: command not found
+
+In [18]: %pwd
+Out[18]: '/Users/wonderful'
+
+In [19]: %dhist
+Directory history (kept in _dh)
+0: /Users/wonderful
+
+In [20]: %env
+Out[20]: 
+{'Apple_PubSub_Socket_Render': '/private/tmp/com.apple.launchd.3gPbVFnJWb/Render',
+ 'CONDA_DEFAULT_ENV': '/Users/wonderful/anaconda',
+ 'CONDA_PATH_BACKUP': '/Users/wonderful/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+ 'CONDA_PREFIX': '/Users/wonderful/anaconda',
+ 'CONDA_PS1_BACKUP': '',
+ 'CONDA_ROOT': '/Users/wonderful/anaconda',
+ 'HOME': '/Users/wonderful',
+ 'LANG': 'en_GB.UTF-8',
+ 'LOGNAME': 'wonderful',
+ 'NVM_DIR': '/Users/wonderful/.nvm',
+ 'NVM_IOJS_ORG_MIRROR': 'https://iojs.org/dist',
+ 'NVM_IOJS_ORG_VERSION_LISTING': 'https://iojs.org/dist/index.tab',
+ 'NVM_NODEJS_ORG_MIRROR': 'https://nodejs.org/dist',
+ 'NVM_RC_VERSION': '',
+ 'PATH': '/Users/wonderful/anaconda/bin:/Volumes/HF/anaconda/bin://anaconda/bin:/Users/wonderful/anaconda/bin:/Users/wonderful/anaconda/bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+ 'PS1': '\\h:\\W \\u\\$ ',
+ 'PWD': '/Users/wonderful',
+ 'SHELL': '/bin/bash',
+ 'SHLVL': '3',
+ 'SSH_AUTH_SOCK': '/private/tmp/com.apple.launchd.wQO4ERFDrH/Listeners',
+ 'TERM': 'xterm-256color',
+ 'TERM_PROGRAM': 'Apple_Terminal',
+ 'TERM_PROGRAM_VERSION': '388.1',
+ 'TERM_SESSION_ID': '51BB8591-AAE0-4FC1-925F-6A74510D49C8',
+ 'TMPDIR': '/var/folders/td/50l3s5314g1d5jqltmn1z1sr0000gn/T/',
+ 'USER': 'wonderful',
+ 'XPC_FLAGS': '0x0',
+ 'XPC_SERVICE_NAME': '0',
+ '_': '/Users/wonderful/anaconda/bin/ipython',
+ '__CF_USER_TEXT_ENCODING': '0x1F5:0x0:0x2'}
+
+In [21]: !ipython
+Python 3.6.0 |Anaconda 4.3.0 (x86_64)| (default, Dec 23 2016, 13:19:00) 
+Type "copyright", "credits" or "license" for more information.
+
+IPython 5.1.0 -- An enhanced Interactive Python.
+?         -> Introduction and overview of IPython's features.
+%quickref -> Quick reference.
+help      -> Python's own help system.
+object?   -> Details about 'object', use 'object??' for extra details.
+
+In [1]: a = !ipython
+
+In [2]: a
+Out[2]: 
+['\x1b]0;IPython: Users/wonderful\x07Python 3.6.0 |Anaconda 4.3.0 (x86_64)| (default, Dec 23 2016, 13:19:00) ',
+ 'Type "copyright", "credits" or "license" for more information.',
+ '',
+ 'IPython 5.1.0 -- An enhanced Interactive Python.',
+ "?         -> Introduction and overview of IPython's features.",
+ '%quickref -> Quick reference.',
+ "help      -> Python's own help system.",
+ "object?   -> Details about 'object', use 'object??' for extra details.",
+ '',
+ 'In [1]: Do you really want to exit ([y]/n)? ']
+
+In [3]: y
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-3-009520053b00> in <module>()
+----> 1 y
+
+NameError: name 'y' is not defined
+
+In [4]: a
+Out[4]: 
+['\x1b]0;IPython: Users/wonderful\x07Python 3.6.0 |Anaconda 4.3.0 (x86_64)| (default, Dec 23 2016, 13:19:00) ',
+ 'Type "copyright", "credits" or "license" for more information.',
+ '',
+ 'IPython 5.1.0 -- An enhanced Interactive Python.',
+ "?         -> Introduction and overview of IPython's features.",
+ '%quickref -> Quick reference.',
+ "help      -> Python's own help system.",
+ "object?   -> Details about 'object', use 'object??' for extra details.",
+ '',
+ 'In [1]: Do you really want to exit ([y]/n)? ']
+
+In [5]: a y
+  File "<ipython-input-5-9dea56aaefd9>", line 1
+    a y
+      ^
+SyntaxError: invalid syntax
+
+
+In [6]: foo = 'test*)
+  File "<ipython-input-6-d0e6ee8857f2>", line 1
+    foo = 'test*)
+                 ^
+SyntaxError: EOL while scanning string literal
+
+
+In [7]: foo = 'test*'
+
+In [8]: !ls $foo
+ls: test*: No such file or directory
+
+In [9]: cd d
+[Errno 2] No such file or directory: 'd'
+/Users/wonderful
+
+In [10]: %bookmark d /Users/wonderful/Desktop
+
+In [11]: cd d
+(bookmark:d) -> /Users/wonderful/Desktop
+/Users/wonderful/Desktop
+
+In [12]: %bookmark -d d
+
+In [13]: cd d
+[Errno 2] No such file or directory: 'd'
+/Users/wonderful/Desktop
+
+In [14]: %bookmark d /Users/wonderful/Desktop
+
+In [15]: cd d
+(bookmark:d) -> /Users/wonderful/Desktop
+/Users/wonderful/Desktop
+
+In [16]: %cd d
+(bookmark:d) -> /Users/wonderful/Desktop
+/Users/wonderful/Desktop
+
+In [17]: %bookmark -l
+Current bookmarks:
+d -> /Users/wonderful/Desktop
+
+In [18]: strings = ['foo', 'foobar', 'baz', 'qux', 'python', 'Gui Van Rossum'] * 100000
+
+In [19]: method1 = [x for x in strings if x.startswith('foo')]
+
+In [20]: method2 = [x for x in strings if x[:3] == 'foo']
+
+In [21]: %time method1 = [x for x in strings if x.startswith('foo')]
+CPU times: user 118 ms, sys: 3.81 ms, total: 122 ms
+Wall time: 123 ms
+
+In [22]: %time method2 = [x for x in strings if x[:3] == 'foo']
+CPU times: user 84 ms, sys: 3.54 ms, total: 87.5 ms
+Wall time: 88.5 ms
+
+In [23]: %timeit method1 = [x for x in strings if x.startswith('foo')]
+10 loops, best of 3: 122 ms per loop
+
+In [24]: %timeit method2 = [x for x in strings if x[:3] == 'foo']
+10 loops, best of 3: 83.8 ms per loop
+
+In [25]: x = 'foobar'
+
+In [26]: y = 'foo
+  File "<ipython-input-26-175662634ea9>", line 1
+    y = 'foo
+            ^
+SyntaxError: EOL while scanning string literal
+
+
+In [27]: y = 'foo'
+
+In [28]: %timeit x.startswith(x)
+The slowest run took 7.31 times longer than the fastest. This could mean that an intermediate result is being cached.
+1000000 loops, best of 3: 223 ns per loop
+
+In [29]: %timeit x[:3] == y
+The slowest run took 6.74 times longer than the fastest. This could mean that an intermediate result is being cached.
+10000000 loops, best of 3: 183 ns per loop
+
+In [30]: python -m cProfile /Users/wonderful/Desktop/cprof_example.py 
+  File "<ipython-input-30-08a6d5b9d052>", line 1
+    python -m cProfile /Users/wonderful/Desktop/cprof_example.py
+                     ^
+SyntaxError: invalid syntax
+
+
+In [31]: python -m cProfile /Users/wonderful/Desktop/cprof_example.py
+  File "<ipython-input-31-601017d02856>", line 1
+    python -m cProfile /Users/wonderful/Desktop/cprof_example.py
+                     ^
+SyntaxError: invalid syntax
+
+
+In [32]: %prun -l 7 -s cumulative /Users/wonderful/Desktop/cprof_example.py 
+  File "<string>", line 1
+    Users(/wonderful/Desktop/cprof_example.py)
+          ^
+SyntaxError: invalid syntax
+
+
+In [33]: cd d
+(bookmark:d) -> /Users/wonderful/Desktop
+/Users/wonderful/Desktop
+
+In [34]: %prun -l 7 -s cumulativecprof_example.p
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+<ipython-input-34-382a93162c50> in <module>()
+----> 1 get_ipython().magic('prun -l 7 -s cumulativecprof_example.p')
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/interactiveshell.py in magic(self, arg_s)
+   2156         magic_name, _, magic_arg_s = arg_s.partition(' ')
+   2157         magic_name = magic_name.lstrip(prefilter.ESC_MAGIC)
+-> 2158         return self.run_line_magic(magic_name, magic_arg_s)
+   2159 
+   2160     #-------------------------------------------------------------------------
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/interactiveshell.py in run_line_magic(self, magic_name, line)
+   2077                 kwargs['local_ns'] = sys._getframe(stack_depth).f_locals
+   2078             with self.builtin_trap:
+-> 2079                 result = fn(*args,**kwargs)
+   2080             return result
+   2081 
+
+<decorator-gen-53> in prun(self, parameter_s, cell)
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magic.py in <lambda>(f, *a, **k)
+    186     # but it's overkill for just that one bit of state.
+    187     def magic_deco(arg):
+--> 188         call = lambda f, *a, **k: f(*a, **k)
+    189 
+    190         if callable(arg):
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magics/execution.py in prun(self, parameter_s, cell)
+    279             arg_str += '\n' + cell
+    280         arg_str = self.shell.input_splitter.transform_cell(arg_str)
+--> 281         return self._run_with_profiler(arg_str, opts, self.shell.user_ns)
+    282 
+    283     def _run_with_profiler(self, code, opts, namespace):
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magics/execution.py in _run_with_profiler(self, code, opts, namespace)
+    306             sys_exit = """*** SystemExit exception caught in code being profiled."""
+    307 
+--> 308         stats = pstats.Stats(prof).strip_dirs().sort_stats(*opts.s)
+    309 
+    310         lims = opts.l
+
+/Users/wonderful/anaconda/lib/python3.6/pstats.py in sort_stats(self, *field)
+    206         connector = ""
+    207         for word in field:
+--> 208             sort_tuple = sort_tuple + sort_arg_defs[word][0]
+    209             self.sort_type += connector + sort_arg_defs[word][1]
+    210             connector = ", "
+
+KeyError: 'cumulativecprof_example.p'
+
+In [35]:  %prun -l 7 -s cumulative cprof_example.py 
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-35-995cb0fe8fcc> in <module>()
+----> 1 get_ipython().magic('prun -l 7 -s cumulative cprof_example.py')
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/interactiveshell.py in magic(self, arg_s)
+   2156         magic_name, _, magic_arg_s = arg_s.partition(' ')
+   2157         magic_name = magic_name.lstrip(prefilter.ESC_MAGIC)
+-> 2158         return self.run_line_magic(magic_name, magic_arg_s)
+   2159 
+   2160     #-------------------------------------------------------------------------
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/interactiveshell.py in run_line_magic(self, magic_name, line)
+   2077                 kwargs['local_ns'] = sys._getframe(stack_depth).f_locals
+   2078             with self.builtin_trap:
+-> 2079                 result = fn(*args,**kwargs)
+   2080             return result
+   2081 
+
+<decorator-gen-53> in prun(self, parameter_s, cell)
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magic.py in <lambda>(f, *a, **k)
+    186     # but it's overkill for just that one bit of state.
+    187     def magic_deco(arg):
+--> 188         call = lambda f, *a, **k: f(*a, **k)
+    189 
+    190         if callable(arg):
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magics/execution.py in prun(self, parameter_s, cell)
+    279             arg_str += '\n' + cell
+    280         arg_str = self.shell.input_splitter.transform_cell(arg_str)
+--> 281         return self._run_with_profiler(arg_str, opts, self.shell.user_ns)
+    282 
+    283     def _run_with_profiler(self, code, opts, namespace):
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magics/execution.py in _run_with_profiler(self, code, opts, namespace)
+    301         prof = profile.Profile()
+    302         try:
+--> 303             prof = prof.runctx(code, namespace, namespace)
+    304             sys_exit = ''
+    305         except SystemExit:
+
+/Users/wonderful/anaconda/lib/python3.6/cProfile.py in runctx(self, cmd, globals, locals)
+     98         self.enable()
+     99         try:
+--> 100             exec(cmd, globals, locals)
+    101         finally:
+    102             self.disable()
+
+<string> in <module>()
+
+NameError: name 'cprof_example' is not defined
+
+In [36]: %run /Users/wonderful/Desktop/cprof_example.py 
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+/Users/wonderful/Desktop/cprof_example.py in <module>()
+     10                 results.append(max_eigenvalue)
+     11         return results
+---> 12 some_results = run_expereiment()
+     13 print('Largest one we saw: %s' % np.max(some_results))
+
+/Users/wonderful/Desktop/cprof_example.py in run_expereiment(niter)
+      5         K = 100
+      6         results = []
+----> 7         for _ in xrange(niter):
+      8                 mat = np.randum.randn(K, K)
+      9                 max_eigenvalue = np.abs(eigvals(mat)).max()
+
+NameError: name 'xrange' is not defined
+
+In [37]: %run /Users/wonderful/Desktop/cprof_example.py 
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+/Users/wonderful/Desktop/cprof_example.py in <module>()
+     10                 results.append(max_eigenvalue)
+     11         return results
+---> 12 some_results = run_expereiment()
+     13 print('Largest one we saw: %s' % np.max(some_results))
+
+/Users/wonderful/Desktop/cprof_example.py in run_expereiment(niter)
+      6         results = []
+      7         for _ in range(niter):
+----> 8                 mat = np.randum.randn(K, K)
+      9                 max_eigenvalue = np.abs(eigvals(mat)).max()
+     10                 results.append(max_eigenvalue)
+
+AttributeError: module 'numpy' has no attribute 'randum'
+
+In [38]: %run /Users/wonderful/Desktop/cprof_example.py
+Largest one we saw: 12.1800087274
+
+In [39]:  %prun -l 7 -s cumulative /Users/wonderful/Desktop/cprof_example.py 
+  File "<string>", line 1
+    Users(/wonderful/Desktop/cprof_example.py)
+          ^
+SyntaxError: invalid syntax
+
+
+In [40]:  %prun -l 7 -s cumulative /Desktop/cprof_example.py 
+  File "<string>", line 1
+    Desktop(/cprof_example.py)
+            ^
+SyntaxError: invalid syntax
+
+
+In [41]: %prun -l 7 -s cumulativec prof_example.py 
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-41-45ad93220924> in <module>()
+----> 1 get_ipython().magic('prun -l 7 -s cumulativec prof_example.py')
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/interactiveshell.py in magic(self, arg_s)
+   2156         magic_name, _, magic_arg_s = arg_s.partition(' ')
+   2157         magic_name = magic_name.lstrip(prefilter.ESC_MAGIC)
+-> 2158         return self.run_line_magic(magic_name, magic_arg_s)
+   2159 
+   2160     #-------------------------------------------------------------------------
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/interactiveshell.py in run_line_magic(self, magic_name, line)
+   2077                 kwargs['local_ns'] = sys._getframe(stack_depth).f_locals
+   2078             with self.builtin_trap:
+-> 2079                 result = fn(*args,**kwargs)
+   2080             return result
+   2081 
+
+<decorator-gen-53> in prun(self, parameter_s, cell)
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magic.py in <lambda>(f, *a, **k)
+    186     # but it's overkill for just that one bit of state.
+    187     def magic_deco(arg):
+--> 188         call = lambda f, *a, **k: f(*a, **k)
+    189 
+    190         if callable(arg):
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magics/execution.py in prun(self, parameter_s, cell)
+    279             arg_str += '\n' + cell
+    280         arg_str = self.shell.input_splitter.transform_cell(arg_str)
+--> 281         return self._run_with_profiler(arg_str, opts, self.shell.user_ns)
+    282 
+    283     def _run_with_profiler(self, code, opts, namespace):
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magics/execution.py in _run_with_profiler(self, code, opts, namespace)
+    301         prof = profile.Profile()
+    302         try:
+--> 303             prof = prof.runctx(code, namespace, namespace)
+    304             sys_exit = ''
+    305         except SystemExit:
+
+/Users/wonderful/anaconda/lib/python3.6/cProfile.py in runctx(self, cmd, globals, locals)
+     98         self.enable()
+     99         try:
+--> 100             exec(cmd, globals, locals)
+    101         finally:
+    102             self.disable()
+
+<string> in <module>()
+
+NameError: name 'prof_example' is not defined
+
+In [42]: %cpaste
+Pasting code; enter '--' alone on the line to stop or use Ctrl-D.
+:import numpy as np
+from numpy.linalg import eigvals
+
+def run_expereiment(niter=100):
+	K = 100
+	results = []
+	for _ in range(niter):
+		mat = np.random.randn(K, K)
+		max_eigenvalue = np.abs(eigvals(mat)).max()
+		results.append(max_eigenvalue)
+	return results
+some_results = run_expereiment()
+print('Largest one we saw: %s' % np.max(some_results))::::::::::::
+:--
+Largest one we saw: 12.0285504312
+
+In [43]: 
+
+In [43]:  %prun -l 7 -s cumulativec run_expereiment()
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+<ipython-input-43-72cb433e535f> in <module>()
+----> 1 get_ipython().magic('prun -l 7 -s cumulativec run_expereiment()')
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/interactiveshell.py in magic(self, arg_s)
+   2156         magic_name, _, magic_arg_s = arg_s.partition(' ')
+   2157         magic_name = magic_name.lstrip(prefilter.ESC_MAGIC)
+-> 2158         return self.run_line_magic(magic_name, magic_arg_s)
+   2159 
+   2160     #-------------------------------------------------------------------------
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/interactiveshell.py in run_line_magic(self, magic_name, line)
+   2077                 kwargs['local_ns'] = sys._getframe(stack_depth).f_locals
+   2078             with self.builtin_trap:
+-> 2079                 result = fn(*args,**kwargs)
+   2080             return result
+   2081 
+
+<decorator-gen-53> in prun(self, parameter_s, cell)
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magic.py in <lambda>(f, *a, **k)
+    186     # but it's overkill for just that one bit of state.
+    187     def magic_deco(arg):
+--> 188         call = lambda f, *a, **k: f(*a, **k)
+    189 
+    190         if callable(arg):
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magics/execution.py in prun(self, parameter_s, cell)
+    279             arg_str += '\n' + cell
+    280         arg_str = self.shell.input_splitter.transform_cell(arg_str)
+--> 281         return self._run_with_profiler(arg_str, opts, self.shell.user_ns)
+    282 
+    283     def _run_with_profiler(self, code, opts, namespace):
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magics/execution.py in _run_with_profiler(self, code, opts, namespace)
+    306             sys_exit = """*** SystemExit exception caught in code being profiled."""
+    307 
+--> 308         stats = pstats.Stats(prof).strip_dirs().sort_stats(*opts.s)
+    309 
+    310         lims = opts.l
+
+/Users/wonderful/anaconda/lib/python3.6/pstats.py in sort_stats(self, *field)
+    206         connector = ""
+    207         for word in field:
+--> 208             sort_tuple = sort_tuple + sort_arg_defs[word][0]
+    209             self.sort_type += connector + sort_arg_defs[word][1]
+    210             connector = ", "
+
+KeyError: 'cumulativec'
+
+In [44]: %prun -l 7 -s cumulative run_expereiment()
+         4004 function calls in 0.431 seconds
+
+   Ordered by: cumulative time
+   List reduced from 33 to 7 due to restriction <7>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.431    0.431 {built-in method builtins.exec}
+        1    0.000    0.000    0.431    0.431 <string>:1(<module>)
+        1    0.001    0.001    0.431    0.431 <ipython-input-42-d658ae0d6b9b>:4(run_expereiment)
+      100    0.392    0.004    0.399    0.004 linalg.py:832(eigvals)
+      100    0.030    0.000    0.030    0.000 {method 'randn' of 'mtrand.RandomState' objects}
+      100    0.003    0.000    0.003    0.000 linalg.py:214(_assertFinite)
+      300    0.002    0.000    0.002    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+ 
+In [45]: %run -p -s cumulative /Users/wonderful/Desktop/cprof_example.py 
+Largest one we saw: 11.5374461236
+ 
+In [46]: %log
+ERROR:root:Line magic function `%log` not found.
+
+In [47]: %logstart
+Activating auto-logging. Current session state plus future input saved.
+Filename       : ipython_log.py
+Mode           : rotate
+Output logging : False
+Raw input log  : False
+Timestamping   : False
+State          : active
+
+In [48]: %logstop
+
+In [49]: 

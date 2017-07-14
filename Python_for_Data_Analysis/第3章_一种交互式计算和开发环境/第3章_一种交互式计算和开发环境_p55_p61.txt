@@ -1,0 +1,298 @@
+Last login: Thu Jul 13 20:14:22 on ttys000
+HF:~ wonderful$ ipython
+Python 3.6.0 |Anaconda 4.3.0 (x86_64)| (default, Dec 23 2016, 13:19:00) 
+Type "copyright", "credits" or "license" for more information.
+
+IPython 5.1.0 -- An enhanced Interactive Python.
+?         -> Introduction and overview of IPython's features.
+%quickref -> Quick reference.
+help      -> Python's own help system.
+object?   -> Details about 'object', use 'object??' for extra details.
+
+In [1]: b = [1, 2, 3]
+
+In [2]: b?
+Type:        list
+String form: [1, 2, 3]
+Length:      3
+Docstring:  
+list() -> new empty list
+list(iterable) -> new list initialized from iterable's items
+
+In [3]: b??
+Type:        list
+String form: [1, 2, 3]
+Length:      3
+
+
+
+
+
+
+
+
+
+
+In [4]: /Users/wonderful/Desktop/Data_Analysis_and_Finance_文件集合/
+  File "<ipython-input-4-e1f68a65fd19>", line 1
+    Users(/wonderful/Desktop/Data_Analysis_and_Finance_文件集合/)
+          ^
+SyntaxError: invalid syntax
+
+
+In [5]: import numpy as bp
+
+In [6]: import numpy as np
+
+In [7]: a = np.random.randn(100, 100)
+
+In [8]: %timeit np.dot(a, a)
+The slowest run took 1517.98 times longer than the fastest. This could mean that an intermediate result is being cached.
+10000 loops, best of 3: 33.5 µs per loop
+
+In [9]: %reset?
+
+In [10]: a = 1
+
+In [11]: a
+Out[11]: 1
+
+In [12]: 'a' in _ip.user_ns
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-12-5d0d03f3ce6b> in <module>()
+----> 1 'a' in _ip.user_ns
+
+NameError: name '_ip' is not defined
+
+In [13]: 'a' in HF.user_ns
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-13-f5fd91f3038b> in <module>()
+----> 1 'a' in HF.user_ns
+
+NameError: name 'HF' is not defined
+
+In [14]: %automagic
+
+Automagic is OFF, % prefix IS needed for line magics.
+
+In [15]: timeit np.dot(a, a)
+  File "<ipython-input-15-a839ce55626d>", line 1
+    timeit np.dot(a, a)
+            ^
+SyntaxError: invalid syntax
+
+
+In [16]: 
+
+In [16]: % prefix IS
+ERROR:root:Line magic function `%prefix` not found.
+
+In [17]: %automagic
+
+Automagic is ON, % prefix IS NOT needed for line magics.
+
+In [18]: qucikref
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-18-725fc97ac551> in <module>()
+----> 1 qucikref
+
+NameError: name 'qucikref' is not defined
+
+In [19]: %quickref
+
+In [20]: quickref
+
+In [21]: %magic
+
+In [22]: debug
+> <ipython-input-18-725fc97ac551>(1)<module>()
+----> 1 qucikref
+
+ipdb> 
+ipdb> quickref
+*** NameError: name 'quickref' is not defined
+ipdb> %quickref
+*** SyntaxError: invalid syntax
+ipdb> debug
+ENTERING RECURSIVE DEBUGGER
+> <string>(1)<module>()
+(ipdb>) ^C--KeyboardInterrupt--
+(ipdb>) ^L
+(ipdb>) a
+(ipdb>) %debug
+*** SyntaxError: invalid syntax
+(ipdb>) quickref
+*** NameError: name 'quickref' is not defined
+(ipdb>) exit()
+LEAVING RECURSIVE DEBUGGER
+--Call--
+> /Users/wonderful/anaconda/lib/python3.6/cmd.py(157)postcmd()
+    155         return line
+    156 
+--> 157     def postcmd(self, stop, line):
+    158         """Hook method executed just after a command dispatch is finished."""
+    159         return stop
+
+ipdb> stop()
+*** TypeError: 'NoneType' object is not callable
+ipdb> q
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-22-359afa063ec5> in <module>()
+----> 1 get_ipython().magic('debug ')
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/interactiveshell.py in magic(self, arg_s)
+   2156         magic_name, _, magic_arg_s = arg_s.partition(' ')
+   2157         magic_name = magic_name.lstrip(prefilter.ESC_MAGIC)
+-> 2158         return self.run_line_magic(magic_name, magic_arg_s)
+   2159 
+   2160     #-------------------------------------------------------------------------
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/interactiveshell.py in run_line_magic(self, magic_name, line)
+   2077                 kwargs['local_ns'] = sys._getframe(stack_depth).f_locals
+   2078             with self.builtin_trap:
+-> 2079                 result = fn(*args,**kwargs)
+   2080             return result
+   2081 
+
+<decorator-gen-55> in debug(self, line, cell)
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magic.py in <lambda>(f, *a, **k)
+    186     # but it's overkill for just that one bit of state.
+    187     def magic_deco(arg):
+--> 188         call = lambda f, *a, **k: f(*a, **k)
+    189 
+    190         if callable(arg):
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magics/execution.py in debug(self, line, cell)
+    426 
+    427         if not (args.breakpoint or args.statement or cell):
+--> 428             self._debug_post_mortem()
+    429         else:
+    430             code = "\n".join(args.statement)
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magics/execution.py in _debug_post_mortem(self)
+    434 
+    435     def _debug_post_mortem(self):
+--> 436         self.shell.debugger(force=True)
+    437 
+    438     def _debug_exec(self, code, breakpoint):
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/interactiveshell.py in debugger(self, force)
+    978             return
+    979 
+--> 980         self.InteractiveTB.debugger(force=True)
+    981 
+    982     #-------------------------------------------------------------------------
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/ultratb.py in debugger(self, force)
+   1239                     etb = etb.tb_next
+   1240                 self.pdb.botframe = etb.tb_frame
+-> 1241                 self.pdb.interaction(self.tb.tb_frame, self.tb)
+   1242 
+   1243         if hasattr(self, 'tb'):
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/debugger.py in interaction(self, frame, traceback)
+    287     def interaction(self, frame, traceback):
+    288         try:
+--> 289             OldPdb.interaction(self, frame, traceback)
+    290         except KeyboardInterrupt:
+    291             sys.stdout.write('\n' + self.shell.get_exception_only())
+
+/Users/wonderful/anaconda/lib/python3.6/pdb.py in interaction(self, frame, traceback)
+    350             return
+    351         self.print_stack_entry(self.stack[self.curindex])
+--> 352         self._cmdloop()
+    353         self.forget()
+    354 
+
+/Users/wonderful/anaconda/lib/python3.6/pdb.py in _cmdloop(self)
+    319                 # the current command, so allow them during interactive input
+    320                 self.allow_kbdint = True
+--> 321                 self.cmdloop()
+    322                 self.allow_kbdint = False
+    323                 break
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/terminal/debugger.py in cmdloop(self, intro)
+     61                 else:
+     62                     self._ptcomp.ipy_completer.namespace = self.curframe_locals
+---> 63                     self._ptcomp.ipy_completer.global_namespace = self.curframe.f_globals
+     64                     try:
+     65                         line = self.pt_cli.run(reset_current_buffer=True).text
+
+AttributeError: 'NoneType' object has no attribute 'f_globals'
+
+In [23]: %debug
+> /Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/terminal/debugger.py(73)cmdloop()
+     71             self.postloop()
+     72         except Exception:
+---> 73             raise
+     74 
+     75 def set_trace():
+
+ipdb> q
+
+In [24]: hist
+b = [1, 2, 3]
+b?
+b??
+/Users/wonderful/Desktop/Data_Analysis_and_Finance_文件集合/
+import numpy as bp
+import numpy as np
+a = np.random.randn(100, 100)
+%timeit np.dot(a, a)
+%reset?
+a = 1
+a
+'a' in _ip.user_ns
+'a' in HF.user_ns
+%automagic
+timeit np.dot(a, a)
+% prefix IS
+%automagic
+qucikref
+%quickref
+quickref
+%magic
+debug
+%debug
+hist
+
+In [25]: pdb
+Automatic pdb calling has been turned ON
+
+In [26]: reset
+Once deleted, variables cannot be recovered. Proceed (y/[n])? y
+
+In [27]: ipython atconsole --pylab=inline
+  File "<ipython-input-27-655a2040cb70>", line 1
+    ipython atconsole --pylab=inline
+                    ^
+SyntaxError: invalid syntax
+
+
+In [28]: ipython qtconsole --pylab=inline
+  File "<ipython-input-28-19a8bde5e462>", line 1
+    ipython qtconsole --pylab=inline
+                    ^
+SyntaxError: invalid syntax
+
+
+In [29]: exit()
+HF:~ wonderful$ ipython --pylab
+Python 3.6.0 |Anaconda 4.3.0 (x86_64)| (default, Dec 23 2016, 13:19:00) 
+Type "copyright", "credits" or "license" for more information.
+
+IPython 5.1.0 -- An enhanced Interactive Python.
+?         -> Introduction and overview of IPython's features.
+%quickref -> Quick reference.
+help      -> Python's own help system.
+object?   -> Details about 'object', use 'object??' for extra details.
+Using matplotlib backend: MacOSX
+
+In [1]: %gui?
+
+In [2]: 

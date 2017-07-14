@@ -1,0 +1,371 @@
+Last login: Thu Jul 13 16:05:04 on ttys000
+HF:~ wonderful$ ipython
+Python 3.6.0 |Anaconda 4.3.0 (x86_64)| (default, Dec 23 2016, 13:19:00) 
+Type "copyright", "credits" or "license" for more information.
+
+IPython 5.1.0 -- An enhanced Interactive Python.
+?         -> Introduction and overview of IPython's features.
+%quickref -> Quick reference.
+help      -> Python's own help system.
+object?   -> Details about 'object', use 'object??' for extra details.
+
+In [1]: a = 5
+
+In [2]: a
+Out[2]: 5
+
+In [3]: import numpy as np
+
+In [4]: from numpy.random import randn
+
+In [5]: data = {i: randn() for i in range(7)}?
+  File "<ipython-input-5-385cdbee170a>", line 1
+    data = {i: randn() for i in range(7)}?
+                                         ^
+SyntaxError: invalid syntax
+
+
+In [6]: data = {i: randn() for i in range(7)}
+
+In [7]: data
+Out[7]: 
+{0: 1.1833932194588306,
+ 1: 1.7566654131935782,
+ 2: 1.1700553439839574,
+ 3: -0.4384337376755135,
+ 4: -0.3855335267388255,
+ 5: -0.9847384955672128,
+ 6: -1.6726334449276983}
+
+In [8]: an_apple = 27
+
+In [9]: an_example = 42
+
+In [10]: an_apple
+Out[10]: 27
+
+In [11]: b = [1, 2, 3]
+
+In [12]: b.clear
+Out[12]: <function list.clear>
+
+In [13]: b
+Out[13]: [1, 2, 3]
+
+In [14]: help(clear)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-14-5963130fde7f> in <module>()
+----> 1 help(clear)
+
+NameError: name 'clear' is not defined
+
+In [15]: help(list.clear)
+
+
+In [16]: c = b.claer
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-16-b3b475803763> in <module>()
+----> 1 c = b.claer
+
+AttributeError: 'list' object has no attribute 'claer'
+
+In [17]: c = b.clear
+
+In [18]: b
+Out[18]: [1, 2, 3]
+
+In [19]: c
+Out[19]: <function list.clear>
+
+In [20]: print(c)
+<built-in method clear of list object at 0x113420e48>
+
+In [21]: import datetime
+
+In [22]: datetime.date
+Out[22]: datetime.date
+
+In [23]: datetime.__builtins__
+Out[23]: 
+{'ArithmeticError': ArithmeticError,
+ 'AssertionError': AssertionError,
+ 'AttributeError': AttributeError,
+ 'BaseException': BaseException,
+ 'BlockingIOError': BlockingIOError,
+ 'BrokenPipeError': BrokenPipeError,
+ 'BufferError': BufferError,
+ 'BytesWarning': BytesWarning,
+ 'ChildProcessError': ChildProcessError,
+ 'ConnectionAbortedError': ConnectionAbortedError,
+ 'ConnectionError': ConnectionError,
+ 'ConnectionRefusedError': ConnectionRefusedError,
+ 'ConnectionResetError': ConnectionResetError,
+ 'DeprecationWarning': DeprecationWarning,
+ 'EOFError': EOFError,
+ 'Ellipsis': Ellipsis,
+ 'EnvironmentError': OSError,
+ 'Exception': Exception,
+ 'False': False,
+ 'FileExistsError': FileExistsError,
+ 'FileNotFoundError': FileNotFoundError,
+ 'FloatingPointError': FloatingPointError,
+ 'FutureWarning': FutureWarning,
+ 'GeneratorExit': GeneratorExit,
+ 'IOError': OSError,
+ 'ImportError': ImportError,
+ 'ImportWarning': ImportWarning,
+ 'IndentationError': IndentationError,
+ 'IndexError': IndexError,
+ 'InterruptedError': InterruptedError,
+ 'IsADirectoryError': IsADirectoryError,
+ 'KeyError': KeyError,
+ 'KeyboardInterrupt': KeyboardInterrupt,
+ 'LookupError': LookupError,
+ 'MemoryError': MemoryError,
+ 'ModuleNotFoundError': ModuleNotFoundError,
+ 'NameError': NameError,
+ 'None': None,
+ 'NotADirectoryError': NotADirectoryError,
+ 'NotImplemented': NotImplemented,
+ 'NotImplementedError': NotImplementedError,
+ 'OSError': OSError,
+ 'OverflowError': OverflowError,
+ 'PendingDeprecationWarning': PendingDeprecationWarning,
+ 'PermissionError': PermissionError,
+ 'ProcessLookupError': ProcessLookupError,
+ 'RecursionError': RecursionError,
+ 'ReferenceError': ReferenceError,
+ 'ResourceWarning': ResourceWarning,
+ 'RuntimeError': RuntimeError,
+ 'RuntimeWarning': RuntimeWarning,
+ 'StopAsyncIteration': StopAsyncIteration,
+ 'StopIteration': StopIteration,
+ 'SyntaxError': SyntaxError,
+ 'SyntaxWarning': SyntaxWarning,
+ 'SystemError': SystemError,
+ 'SystemExit': SystemExit,
+ 'TabError': TabError,
+ 'TimeoutError': TimeoutError,
+ 'True': True,
+ 'TypeError': TypeError,
+ 'UnboundLocalError': UnboundLocalError,
+ 'UnicodeDecodeError': UnicodeDecodeError,
+ 'UnicodeEncodeError': UnicodeEncodeError,
+ 'UnicodeError': UnicodeError,
+ 'UnicodeTranslateError': UnicodeTranslateError,
+ 'UnicodeWarning': UnicodeWarning,
+ 'UserWarning': UserWarning,
+ 'ValueError': ValueError,
+ 'Warning': Warning,
+ 'ZeroDivisionError': ZeroDivisionError,
+ '__IPYTHON__': True,
+ '__build_class__': <function __build_class__>,
+ '__debug__': True,
+ '__doc__': "Built-in functions, exceptions, and other objects.\n\nNoteworthy: None is the `nil' object; Ellipsis represents `...' in slices.",
+ '__import__': <function __import__>,
+ '__loader__': _frozen_importlib.BuiltinImporter,
+ '__name__': 'builtins',
+ '__package__': '',
+ '__spec__': ModuleSpec(name='builtins', loader=<class '_frozen_importlib.BuiltinImporter'>),
+ 'abs': <function abs>,
+ 'all': <function all>,
+ 'any': <function any>,
+ 'ascii': <function ascii>,
+ 'bin': <function bin>,
+ 'bool': bool,
+ 'bytearray': bytearray,
+ 'bytes': bytes,
+ 'callable': <function callable>,
+ 'chr': <function chr>,
+ 'classmethod': classmethod,
+ 'compile': <function compile>,
+ 'complex': complex,
+ 'copyright': Copyright (c) 2001-2016 Python Software Foundation.
+ All Rights Reserved.
+ 
+ Copyright (c) 2000 BeOpen.com.
+ All Rights Reserved.
+ 
+ Copyright (c) 1995-2001 Corporation for National Research Initiatives.
+ All Rights Reserved.
+ 
+ Copyright (c) 1991-1995 Stichting Mathematisch Centrum, Amsterdam.
+ All Rights Reserved.,
+ 'credits':     Thanks to CWI, CNRI, BeOpen.com, Zope Corporation and a cast of thousands
+     for supporting Python development.  See www.python.org for more information.,
+ 'delattr': <function delattr>,
+ 'dict': dict,
+ 'dir': <function dir>,
+ 'divmod': <function divmod>,
+ 'dreload': <function IPython.lib.deepreload._dreload>,
+ 'enumerate': enumerate,
+ 'eval': <function eval>,
+ 'exec': <function exec>,
+ 'filter': filter,
+ 'float': float,
+ 'format': <function format>,
+ 'frozenset': frozenset,
+ 'get_ipython': <bound method InteractiveShell.get_ipython of <IPython.terminal.interactiveshell.TerminalInteractiveShell object at 0x10d4df390>>,
+ 'getattr': <function getattr>,
+ 'globals': <function globals>,
+ 'hasattr': <function hasattr>,
+ 'hash': <function hash>,
+ 'help': Type help() for interactive help, or help(object) for help about object.,
+ 'hex': <function hex>,
+ 'id': <function id>,
+ 'input': <function input>,
+ 'int': int,
+ 'isinstance': <function isinstance>,
+ 'issubclass': <function issubclass>,
+ 'iter': <function iter>,
+ 'len': <function len>,
+ 'license': Type license() to see the full license text,
+ 'list': list,
+ 'locals': <function locals>,
+ 'map': map,
+ 'max': <function max>,
+ 'memoryview': memoryview,
+ 'min': <function min>,
+ 'next': <function next>,
+ 'object': object,
+ 'oct': <function oct>,
+ 'open': <function io.open>,
+ 'ord': <function ord>,
+ 'pow': <function pow>,
+ 'print': <function print>,
+ 'property': property,
+ 'range': range,
+ 'repr': <function repr>,
+ 'reversed': reversed,
+ 'round': <function round>,
+ 'set': set,
+ 'setattr': <function setattr>,
+ 'slice': slice,
+ 'sorted': <function sorted>,
+ 'staticmethod': staticmethod,
+ 'str': str,
+ 'sum': <function sum>,
+ 'super': super,
+ 'tuple': tuple,
+ 'type': type,
+ 'vars': <function vars>,
+ 'zip': zip}
+
+In [24]: /Users/wonderful/Desktop/Data_Analysis_and_Finance_文件集合/
+  File "<ipython-input-24-e1f68a65fd19>", line 1
+    Users(/wonderful/Desktop/Data_Analysis_and_Finance_文件集合/)
+          ^
+SyntaxError: invalid syntax
+
+
+In [25]: b?
+Type:        list
+String form: [1, 2, 3]
+Length:      3
+Docstring:  
+list() -> new empty list
+list(iterable) -> new list initialized from iterable's items
+
+In [26]: %run /Users/wonderful/Desktop/run.py 
+
+In [27]: c
+Out[27]: 7.5
+
+In [28]: result
+Out[28]: 1.4666666666666666
+
+In [29]: def f(x, y, z):
+    ...: ^Ireturn (x + y) / z
+    ...: a = 5
+    ...: b = 6
+    ...: c = 7.5
+    ...: 
+    ...: result = f(a, b, c)
+    ...: 
+
+In [30]: %paste
+def f(x, y, z):
+        return (x + y) / z
+a = 5
+b = 6
+c = 7.5
+
+result = f(a, b, c)
+
+## -- End pasted text --
+
+In [31]: %cpaste
+Pasting code; enter '--' alone on the line to stop or use Ctrl-D.
+:def f(x, y, z):
+	return (x + y) / z
+a = 5
+b = 6
+c = 7.5
+
+result = f(a, b, c)::::::        
+:
+:^C---------------------------------------------------------------------------
+KeyboardInterrupt                         Traceback (most recent call last)
+<ipython-input-31-e421ebe20206> in <module>()
+----> 1 get_ipython().magic('cpaste')
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/interactiveshell.py in magic(self, arg_s)
+   2156         magic_name, _, magic_arg_s = arg_s.partition(' ')
+   2157         magic_name = magic_name.lstrip(prefilter.ESC_MAGIC)
+-> 2158         return self.run_line_magic(magic_name, magic_arg_s)
+   2159 
+   2160     #-------------------------------------------------------------------------
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/interactiveshell.py in run_line_magic(self, magic_name, line)
+   2077                 kwargs['local_ns'] = sys._getframe(stack_depth).f_locals
+   2078             with self.builtin_trap:
+-> 2079                 result = fn(*args,**kwargs)
+   2080             return result
+   2081 
+
+<decorator-gen-25> in cpaste(self, parameter_s)
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/core/magic.py in <lambda>(f, *a, **k)
+    186     # but it's overkill for just that one bit of state.
+    187     def magic_deco(arg):
+--> 188         call = lambda f, *a, **k: f(*a, **k)
+    189 
+    190         if callable(arg):
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/terminal/magics.py in cpaste(self, parameter_s)
+    139 
+    140         sentinel = opts.get('s', u'--')
+--> 141         block = '\n'.join(get_pasted_lines(sentinel, quiet=quiet))
+    142         self.store_or_execute(block, name)
+    143 
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/terminal/magics.py in get_pasted_lines(sentinel, l_input, quiet)
+     28     while True:
+     29         try:
+---> 30             l = py3compat.str_to_unicode(l_input(prompt))
+     31             if l == sentinel:
+     32                 return
+
+/Users/wonderful/anaconda/lib/python3.6/site-packages/IPython/utils/py3compat.py in input(prompt)
+    150     # to forward requests to a frontend.
+    151     def input(prompt=''):
+--> 152         return builtin_mod.input(prompt)
+    153 
+    154     builtin_mod_name = "builtins"
+
+KeyboardInterrupt: 
+
+In [32]: %cpaste
+Pasting code; enter '--' alone on the line to stop or use Ctrl-D.
+:def f(x, y, z):
+	return (x + y) / z
+a = 5
+b = 6
+c = 7.5
+
+result = f(a, b, c)::::::
+:--
+
+In [33]: 
