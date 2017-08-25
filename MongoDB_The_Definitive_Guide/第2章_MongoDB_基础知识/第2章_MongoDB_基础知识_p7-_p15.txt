@@ -1,0 +1,46 @@
+Last login: Fri Aug 25 16:01:18 on ttys001
+HF:~ wonderful$ mongo
+MongoDB shell version v3.4.7
+connecting to: mongodb://127.0.0.1:27017
+MongoDB server version: 3.4.7
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+	http://docs.mongodb.org/
+Questions? Try the support group
+	http://groups.google.com/group/mongodb-user
+Server has startup warnings: 
+2017-08-25T16:03:27.042+0800 I CONTROL  [initandlisten] 
+2017-08-25T16:03:27.042+0800 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2017-08-25T16:03:27.042+0800 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2017-08-25T16:03:27.042+0800 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.
+2017-08-25T16:03:27.042+0800 I CONTROL  [initandlisten] 
+2017-08-25T16:03:27.042+0800 I CONTROL  [initandlisten] 
+2017-08-25T16:03:27.042+0800 I CONTROL  [initandlisten] ** WARNING: soft rlimits too low. Number of files is 256, should be at least 1000
+> x = 200
+200
+> x / 5
+40
+> Math.sin(Math.PI / 2)
+1
+> new Data('2010/1/1')
+2017-08-25T16:07:11.477+0800 E QUERY    [thread1] ReferenceError: Data is not defined :
+@(shell):1:1
+> 'Heool, World!'.replace('World', 'MongoDB')
+Heool, MongoDB!
+> function factorial (n){
+... if (n <= 1) return 1;
+... return n * factorial(n -1);
+... }
+> factorial(5);
+120
+> db
+test
+> use foobar
+switched to db foobar
+> db
+foobar
+> post = {'title': 'My Blog Post',
+... 'content': 'Here's my blog post.',
+2017-08-25T16:29:40.631+0800 E QUERY    [thread1] SyntaxError: missing } after property list @(shell):2:17
+> 
