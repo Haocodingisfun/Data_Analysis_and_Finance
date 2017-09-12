@@ -1,0 +1,245 @@
+Last login: Tue Sep 12 16:18:54 on ttys004
+HF:~ wonderful$ mysql
+-bash: mysql: command not found
+HF:~ wonderful$ /usr/local/bin/mysql
+-bash: /usr/local/bin/mysql: No such file or directory
+HF:~ wonderful$ /usr/local/mysql/bin/mysql
+ERROR 1045 (28000): Access denied for user 'wonderful'@'localhost' (using password: NO)
+HF:~ wonderful$ /usr/local/mysql/bin/mysql -u root -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+HF:~ wonderful$ /usr/local/mysql/bin/mysql -u root -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+HF:~ wonderful$ /usr/local/mysql/bin/mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 579
+Server version: 5.7.19 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SELECT user, Host FROME mysql.user;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql.user' at line 1
+mysql> SELECT user,Host FROME mysql.user;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql.user' at line 1
+mysql> -e "SELECT user,Host FROME mysql.user;"
+    -> "SELECT user,Host FROME mysql.user;"
+    -> SELECT user,Host FROME mysql.user;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-e "SELECT user,Host FROME mysql.user;"
+"SELECT user,Host FROME mysql.user;"
+SEL' at line 1
+mysql> SELECT user,Host FROME mysql.user
+    -> SELECT user FROME mysql.user;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql.user
+SELECT user FROME mysql.user' at line 1
+mysql> mysql.user
+    -> SELECT user FROME mysql.user
+    -> mysql.user
+    -> SELECT user FROME mysql.user
+    -> mysql.user SELECT user FROME mysql.user;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql.user
+SELECT user FROME mysql.user
+mysql.user
+SELECT user FROME mysql.user
+' at line 1
+mysql> exit
+Bye
+HF:~ wonderful$ mysql -u root -p
+-bash: mysql: command not found
+HF:~ wonderful$ alias mysql=/usr/local/mysql/bin/mysql
+HF:~ wonderful$ mysql -u root -p -e "SELECT User,Host FROM mysql.user;"
+Enter password: 
+ERROR 29 (HY000) at line 1: File './mysql/user.MYD' not found (Errcode: 2 - No such file or directory)
+HF:~ wonderful$ mysql -u root -p -e "GREQT USAGE ON **.*
+> TO 'russell'@'localhost'
+> IDENTIFIED BY ‘XXXX’;”
+Enter password: 
+ERROR 1064 (42000) at line 1: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GREQT USAGE ON **.*
+TO 'russell'@'localhost'
+IDENTIFIED BY 'XXXX'' at line 1
+HF:~ wonderful$ mysql -u root -p -e "GREAT SELECT ON *.* TO 'russell'@'localhost';"
+Enter password: 
+ERROR 1064 (42000) at line 1: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GREAT SELECT ON *.* TO 'russell'@'localhost'' at line 1
+HF:~ wonderful$ mysql
+ERROR 1045 (28000): Access denied for user 'wonderful'@'localhost' (using password: NO)
+HF:~ wonderful$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1015
+Server version: 5.7.19 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> help
+
+For information about MySQL products and services, visit:
+   http://www.mysql.com/
+For developer information, including the MySQL Reference Manual, visit:
+   http://dev.mysql.com/
+To buy MySQL Enterprise support, training, or other products, visit:
+   https://shop.mysql.com/
+
+List of all MySQL commands:
+Note that all text commands must be first on line and end with ';'
+?         (\?) Synonym for `help'.
+clear     (\c) Clear the current input statement.
+connect   (\r) Reconnect to the server. Optional arguments are db and host.
+delimiter (\d) Set statement delimiter.
+edit      (\e) Edit command with $EDITOR.
+ego       (\G) Send command to mysql server, display result vertically.
+exit      (\q) Exit mysql. Same as quit.
+go        (\g) Send command to mysql server.
+help      (\h) Display this help.
+nopager   (\n) Disable pager, print to stdout.
+notee     (\t) Don't write into outfile.
+pager     (\P) Set PAGER [to_pager]. Print the query results via PAGER.
+print     (\p) Print current command.
+prompt    (\R) Change your mysql prompt.
+quit      (\q) Quit mysql.
+rehash    (\#) Rebuild completion hash.
+source    (\.) Execute an SQL script file. Takes a file name as an argument.
+status    (\s) Get status information from the server.
+system    (\!) Execute a system shell command.
+tee       (\T) Set outfile [to_outfile]. Append everything into given outfile.
+use       (\u) Use another database. Takes database name as argument.
+charset   (\C) Switch to another charset. Might be needed for processing binlog with multi-byte charsets.
+warnings  (\W) Show warnings after every statement.
+nowarning (\w) Don't show warnings after every statement.
+resetconnection(\x) Clean session context.
+
+For server side help, type 'help contents'
+
+mysql> claer
+    -> system
+    -> help
+    -> ^C
+mysql> version
+    -> ^C
+mysql> -version
+    -> ^C
+mysql> SELECTVERSION()
+    -> SELECT VERSION()
+    -> SELECT VERSION();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECTVERSION()
+SELECT VERSION()
+SELECT VERSION()' at line 1
+mysql> ELECT VERSION(), CURRENT_DATE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ELECT VERSION(), CURRENT_DATE' at line 1
+mysql> SELECT SIN(PI()/4), (4+1)*5;
++--------------------+---------+
+| SIN(PI()/4)        | (4+1)*5 |
++--------------------+---------+
+| 0.7071067811865475 |      25 |
++--------------------+---------+
+1 row in set (0.00 sec)
+
+mysql> select version(), current_date;
++-----------+--------------+
+| version() | current_date |
++-----------+--------------+
+| 5.7.19    | 2017-09-12   |
++-----------+--------------+
+1 row in set (0.00 sec)
+
+mysql> SeLeCt vErSiOn(), current_DATE;
++-----------+--------------+
+| vErSiOn() | current_DATE |
++-----------+--------------+
+| 5.7.19    | 2017-09-12   |
++-----------+--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT VERSION(), CURRENT_DATE;
++-----------+--------------+
+| VERSION() | CURRENT_DATE |
++-----------+--------------+
+| 5.7.19    | 2017-09-12   |
++-----------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select version();
++-----------+
+| version() |
++-----------+
+| 5.7.19    |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> current date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'current date' at line 1
+mysql> current_date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'current_date' at line 1
+mysql> select furrent_date;
+ERROR 1054 (42S22): Unknown column 'furrent_date' in 'field list'
+mysql> select current_date;
++--------------+
+| current_date |
++--------------+
+| 2017-09-12   |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select current_Date;
++--------------+
+| current_Date |
++--------------+
+| 2017-09-12   |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select current_date, current_date;
++--------------+--------------+
+| current_date | current_date |
++--------------+--------------+
+| 2017-09-12   | 2017-09-12   |
++--------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select user;
+ERROR 1054 (42S22): Unknown column 'user' in 'field list'
+mysql> select user from /bin/mysql.user;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '/bin/mysql.user' at line 1
+mysql> select user form mysql.user;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql.user' at line 1
+mysql> show grants mysql> 
+mysql> grant usage on *.* to 'russell'@'localhost' identified by 'XXXX';
+ERROR 29 (HY000): File './mysql/user.MYD' not found (Errcode: 2 - No such file or directory)
+mysql> select version(); select current_date;
++-----------+
+| version() |
++-----------+
+| 5.7.19    |
++-----------+
+1 row in set (0.00 sec)
+
++--------------+
+| current_date |
++--------------+
+| 2017-09-12   |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select
+    -> version()
+    -> ;
++-----------+
+| version() |
++-----------+
+| 5.7.19    |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> 
