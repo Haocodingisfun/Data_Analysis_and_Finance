@@ -1,0 +1,159 @@
+Last login: Wed Sep 13 16:08:40 on ttys000
+HF:~ wonderful$ mongo
+MongoDB shell version v3.4.7
+connecting to: mongodb://127.0.0.1:27017
+MongoDB server version: 3.4.7
+Server has startup warnings: 
+2017-09-13T10:12:26.072+0800 I CONTROL  [initandlisten] 
+2017-09-13T10:12:26.072+0800 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2017-09-13T10:12:26.072+0800 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2017-09-13T10:12:26.072+0800 I CONTROL  [initandlisten] 
+> show dbs
+RQ_Analysis          0.000GB
+RQ_test              0.000GB
+admin                0.000GB
+aggregation_example  0.000GB
+data                 0.026GB
+datas                0.000GB
+local                0.000GB
+test                 0.000GB
+test-database        0.000GB
+> use test
+switched to db test
+> show collections
+food
+> psot = {'title': 1,
+... 'content': 'hi'}
+{ "title" : 1, "content" : "hi" }
+> post = {'title': 'My Blog Post',
+... 'content': "Here's my blog post.',
+2017-09-13T16:38:27.460+0800 E QUERY    [thread1] SyntaxError: unterminated string literal @(shell):2:11
+> post = {'title': 'My Blog Post',
+... 'content': "Here's my blog post.",
+... 'date': New Date()}
+2017-09-13T16:38:55.382+0800 E QUERY    [thread1] SyntaxError: missing } after property list @(shell):3:12
+> post = {'title': 'My Blog Post',
+... 'content': "Here's my blog post."}
+{ "title" : "My Blog Post", "content" : "Here's my blog post." }
+> post = {'title': 'My Blog Post',
+... 'content': "Here's my blog post.",
+... 'time': '20170913'}
+{
+	"title" : "My Blog Post",
+	"content" : "Here's my blog post.",
+	"time" : "20170913"
+}
+> new Date()
+ISODate("2017-09-13T08:39:49.837Z")
+> post = {'title': 'My Blog Post',
+... 'content': "Here's my blog post."
+... 'time': new Date()}
+2017-09-13T16:40:45.003+0800 E QUERY    [thread1] SyntaxError: missing } after property list @(shell):3:0
+> post = {'title': 'My Blog Post',
+... 'content': "Here's my blog post.",
+... 'time': new Date()}
+{
+	"title" : "My Blog Post",
+	"content" : "Here's my blog post.",
+	"time" : ISODate("2017-09-13T08:41:08.939Z")
+}
+> bb.food.insert(post0
+... 9
+... ^C
+
+> db.food.insert(post)
+WriteResult({ "nInserted" : 1 })
+> db.food.find()
+{ "_id" : ObjectId("59b149c3498ab12fe8c48838"), "x" : 1 }
+{ "_id" : ObjectId("59b8ef414c6f3302e18a66f9"), "title" : "My Blog Post", "content" : "Here's my blog post.", "time" : ISODate("2017-09-13T08:41:08.939Z") }
+> db.food.findone()
+2017-09-13T16:43:05.250+0800 E QUERY    [thread1] TypeError: db.food.findone is not a function :
+@(shell):1:1
+> db.food.findOne()
+{ "_id" : ObjectId("59b149c3498ab12fe8c48838"), "x" : 1 }
+> f = db.food
+test.food
+> f.findOne()
+{ "_id" : ObjectId("59b149c3498ab12fe8c48838"), "x" : 1 }
+> post.comments = []
+[ ]
+> f.update({title: 'My Blog Posst'}, post)
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> f.findMany()
+2017-09-13T16:44:52.715+0800 E QUERY    [thread1] TypeError: f.findMany is not a function :
+@(shell):1:1
+> f.drop({x: 1})
+2017-09-13T16:45:17.101+0800 E QUERY    [thread1] Error: drop takes no argument :
+DBCollection.prototype.drop@src/mongo/shell/collection.js:747:1
+@(shell):1:1
+> f.delete({x: 1})
+2017-09-13T16:45:29.826+0800 E QUERY    [thread1] TypeError: f.delete is not a function :
+@(shell):1:1
+> f.deleteOne({x: 1})
+{ "acknowledged" : true, "deletedCount" : 1 }
+> f.find()
+{ "_id" : ObjectId("59b8ef414c6f3302e18a66f9"), "title" : "My Blog Post", "content" : "Here's my blog post.", "time" : ISODate("2017-09-13T08:41:08.939Z") }
+> post.comments = []
+[ ]
+> f.update({'title': 'My Blog Posst'}, post)
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> f.update({title: 'My Blog Post'}, post)
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> f.findone()
+2017-09-13T16:46:58.640+0800 E QUERY    [thread1] TypeError: f.findone is not a function :
+@(shell):1:1
+> f.finOne()
+2017-09-13T16:47:03.381+0800 E QUERY    [thread1] TypeError: f.finOne is not a function :
+@(shell):1:1
+> f.findOne()
+{
+	"_id" : ObjectId("59b8ef414c6f3302e18a66f9"),
+	"title" : "My Blog Post",
+	"content" : "Here's my blog post.",
+	"time" : ISODate("2017-09-13T08:41:08.939Z"),
+	"comments" : [ ]
+}
+> f.remove({'title': 'My Blog Post'})
+WriteResult({ "nRemoved" : 1 })
+> f.find()
+> {'x', null}
+null
+> {'x': false}
+2017-09-13T16:52:07.743+0800 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:4
+> {'x': null}
+2017-09-13T16:52:37.919+0800 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:4
+> {'x': 3.14}
+2017-09-13T16:53:00.240+0800 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:4
+> {'x': 'hi'}
+2017-09-13T16:53:09.953+0800 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:4
+> p = {'x': 'hi'}
+{ "x" : "hi" }
+> p
+{ "x" : "hi" }
+> p = {'x': false}
+{ "x" : false }
+> p
+{ "x" : false }
+> p = {'x': [1, 2, 3, 4]}
+{ "x" : [ 1, 2, 3, 4 ] }
+> p
+{ "x" : [ 1, 2, 3, 4 ] }
+> p {'x': ObjectId(1)}
+2017-09-13T16:55:53.806+0800 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:2
+> p = {'x': ObjectId(1)}
+2017-09-13T16:56:00.688+0800 E QUERY    [thread1] Error: invalid object id: length :
+@(shell):1:11
+>  p = {'x': ObjectId(111111111111)}
+2017-09-13T17:03:26.361+0800 E QUERY    [thread1] Error: invalid object id: length :
+@(shell):1:11
+> Date()
+Wed Sep 13 2017 17:04:34 GMT+0800 (CST)
+> new Date(0
+... )
+ISODate("1970-01-01T00:00:00Z")
+> new Date(0
+... )
+ISODate("1970-01-01T00:00:00Z")
+> new Date()
+ISODate("2017-09-13T09:04:51.607Z")
+> 
