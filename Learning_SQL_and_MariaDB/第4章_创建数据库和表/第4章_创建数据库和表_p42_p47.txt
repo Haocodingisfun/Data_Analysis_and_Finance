@@ -1,0 +1,412 @@
+Last login: Wed Sep 13 14:56:09 on ttys004
+HF:~ wonderful$ alias mysql=/usr/local/mysql/bin/mysql
+HF:~ wonderful$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1626
+Server version: 5.7.19 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| birdwatchers       |
+| mysql              |
+| performance_schema |
+| rookery            |
+| sys                |
+| test               |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> USE rookery
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_rookery |
++-------------------+
+| bird_families     |
+| bird_orders       |
+| birds             |
+| birds_bill_shapes |
+| birds_body_shapes |
+| birds_wing_shapes |
++-------------------+
+6 rows in set (0.00 sec)
+
+mysql> ALERT TABLE bird_families
+    -> ADD COLUMN order_if INT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ALERT TABLE bird_families
+ADD COLUMN order_if INT' at line 1
+mysql> ALERT TABLE bird_families
+    -> ADD COLUMN order_id INT;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ALERT TABLE bird_families
+ADD COLUMN order_id INT' at line 1
+mysql> ALTER TABLE bird_families
+    -> ADD COLUMN bird_id INT;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE test.birds LIKE birds;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> USE test;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> DESCRIBE birds;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| bird_id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| scientific_name | varchar(225) | YES  | UNI | NULL    |                |
+| common_name     | varchar(50)  | YES  |     | NULL    |                |
+| family_id       | int(11)      | YES  |     | NULL    |                |
+| description     | text         | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> DROP birds;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'birds' at line 1
+mysql> DROP TABLE birds;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> USE rookery 
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_rookery |
++-------------------+
+| bird_families     |
+| bird_orders       |
+| birds             |
+| birds_bill_shapes |
+| birds_body_shapes |
+| birds_wing_shapes |
++-------------------+
+6 rows in set (0.00 sec)
+
+mysql> CREATE TABLE test.birds_new LIKE birds;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> USE tset
+ERROR 1049 (42000): Unknown database 'tset'
+mysql> USE test
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> DESCRIBE birds_new;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| bird_id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| scientific_name | varchar(225) | YES  | UNI | NULL    |                |
+| common_name     | varchar(50)  | YES  |     | NULL    |                |
+| family_id       | int(11)      | YES  |     | NULL    |                |
+| description     | text         | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO birds_new
+    -> SELECT * FROM rookery.birds;
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE birds_new;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| bird_id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| scientific_name | varchar(225) | YES  | UNI | NULL    |                |
+| common_name     | varchar(50)  | YES  |     | NULL    |                |
+| family_id       | int(11)      | YES  |     | NULL    |                |
+| description     | text         | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM birds_new;
++---------+----------------------+-------------------------+-----------+-------------+
+| bird_id | scientific_name      | common_name             | family_id | description |
++---------+----------------------+-------------------------+-----------+-------------+
+|       1 | Charadrius vociferus | Killdeer                |      NULL | NULL        |
+|       2 | Gavia immer          | Great Northern Loon     |      NULL | NULL        |
+|       3 | Aix sponsa           | Wood Duck               |      NULL | NULL        |
+|       4 | Chordeiles minor     | Common Nighthawk        |      NULL | NULL        |
+|       5 | Sitta carolinensis   | Ehite-breasted Nuthatch |      NULL | NULL        |
+|       6 | Apreryx mantelli     | North Island Brown Kiwi |      NULL | NULL        |
++---------+----------------------+-------------------------+-----------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> CREATE TABLE birds_new_alternative
+    -> SELECT * FROM rookery.birds;
+Query OK, 6 rows affected (0.02 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM birds_new_alternative;
++---------+----------------------+-------------------------+-----------+-------------+
+| bird_id | scientific_name      | common_name             | family_id | description |
++---------+----------------------+-------------------------+-----------+-------------+
+|       1 | Charadrius vociferus | Killdeer                |      NULL | NULL        |
+|       2 | Gavia immer          | Great Northern Loon     |      NULL | NULL        |
+|       3 | Aix sponsa           | Wood Duck               |      NULL | NULL        |
+|       4 | Chordeiles minor     | Common Nighthawk        |      NULL | NULL        |
+|       5 | Sitta carolinensis   | Ehite-breasted Nuthatch |      NULL | NULL        |
+|       6 | Apreryx mantelli     | North Island Brown Kiwi |      NULL | NULL        |
++---------+----------------------+-------------------------+-----------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> DESCTIBE birds_new_alternative;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DESCTIBE birds_new_alternative' at line 1
+mysql> DESCRIBE birds_new_alternative;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| bird_id         | int(11)      | NO   |     | 0       |       |
+| scientific_name | varchar(225) | YES  |     | NULL    |       |
+| common_name     | varchar(50)  | YES  |     | NULL    |       |
+| family_id       | int(11)      | YES  |     | NULL    |       |
+| description     | text         | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> DROP birds_new_alternative;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'birds_new_alternative' at line 1
+mysql> DROP TABLE birds_new_alternative;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SHOW TABLES;
++----------------+
+| Tables_in_test |
++----------------+
+| birds_new      |
+| book           |
+| contacts       |
+| relation_types |
+| status_names   |
++----------------+
+5 rows in set (0.00 sec)
+
+mysql> ALTER TABLE birds_new 
+    -> ADD COLUMN wing_id CHAR(2);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE birds_new;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| bird_id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| scientific_name | varchar(225) | YES  | UNI | NULL    |                |
+| common_name     | varchar(50)  | YES  |     | NULL    |                |
+| family_id       | int(11)      | YES  |     | NULL    |                |
+| description     | text         | YES  |     | NULL    |                |
+| wing_id         | char(2)      | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> ALTER TABLE birds_new
+    -> DROP COLUMN wing_id;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE birds_new
+    -> ADD CLUMN wing_id CHAR(2) AFTER family_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'wing_id CHAR(2) AFTER family_id' at line 2
+mysql> ALTER TABLE birds_new
+    -> ADD COLUMN wing_id CHAR(2) AFTER family_id;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE birds_new;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| bird_id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| scientific_name | varchar(225) | YES  | UNI | NULL    |                |
+| common_name     | varchar(50)  | YES  |     | NULL    |                |
+| family_id       | int(11)      | YES  |     | NULL    |                |
+| wing_id         | char(2)      | YES  |     | NULL    |                |
+| description     | text         | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> ALTER TABLE birds_new
+    -> ADD COLUMN test FIRST;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FIRST' at line 2
+mysql> ALTER TABLE birds_new
+    -> ADD COLUMN test FIRST;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FIRST' at line 2
+mysql> ALTER TABLE birds_new
+    -> ADD COLUMN test
+    -> FIRST;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FIRST' at line 3
+mysql> ALTER TABLE birds_new
+    -> ADD COLUMN test FIRST bird_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FIRST bird_id' at line 2
+mysql> DESCRIBE birds_new;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| bird_id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| scientific_name | varchar(225) | YES  | UNI | NULL    |                |
+| common_name     | varchar(50)  | YES  |     | NULL    |                |
+| family_id       | int(11)      | YES  |     | NULL    |                |
+| wing_id         | char(2)      | YES  |     | NULL    |                |
+| description     | text         | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> ALTER TABLE birds_new
+    -> ADD COLUMN test
+    -> FIRST;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FIRST' at line 3
+mysql> ALTER TABLE birds_new
+    -> ADD COLUMN test INT FIRST;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE birds_new;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| test            | int(11)      | YES  |     | NULL    |                |
+| bird_id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| scientific_name | varchar(225) | YES  | UNI | NULL    |                |
+| common_name     | varchar(50)  | YES  |     | NULL    |                |
+| family_id       | int(11)      | YES  |     | NULL    |                |
+| wing_id         | char(2)      | YES  |     | NULL    |                |
+| description     | text         | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> ALTER TABLE birds_new
+    -> DROP COLUMN test;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE birds_new;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| bird_id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| scientific_name | varchar(225) | YES  | UNI | NULL    |                |
+| common_name     | varchar(50)  | YES  |     | NULL    |                |
+| family_id       | int(11)      | YES  |     | NULL    |                |
+| wing_id         | char(2)      | YES  |     | NULL    |                |
+| description     | text         | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> ALTER TABLE birds_new 
+    -> ADD COLUMN body_id char(2) AFTER wing_id,
+    -> ADD COLUMN bill_id CHAR(2) AFTER body_id,
+    -> ADD COLUMN endangered BIT DEFAULT b'1' AFTER bill_id,
+    -> CHANGE COLUMN common_name common_name VARCHAR(255);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE birdS_new;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| bird_id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| scientific_name | varchar(225) | YES  | UNI | NULL    |                |
+| common_name     | varchar(255) | YES  |     | NULL    |                |
+| family_id       | int(11)      | YES  |     | NULL    |                |
+| wing_id         | char(2)      | YES  |     | NULL    |                |
+| body_id         | char(2)      | YES  |     | NULL    |                |
+| bill_id         | char(2)      | YES  |     | NULL    |                |
+| endangered      | bit(1)       | YES  |     | b'1'    |                |
+| description     | text         | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+9 rows in set (0.00 sec)
+
+mysql> UPDATE birds_new SET endangered = 0
+    -> WHERE bird_in IN(1, 2, 4, 5);
+ERROR 1054 (42S22): Unknown column 'bird_in' in 'where clause'
+mysql> UPDATE birds_new SET endangered = 0
+    -> WHERE bird_id IN(1, 2, 4, 5);
+Query OK, 4 rows affected (0.00 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> SELECT bird_id FROM birds_new;
++---------+
+| bird_id |
++---------+
+|       3 |
+|       6 |
+|       1 |
+|       4 |
+|       2 |
+|       5 |
++---------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT bird_id, endangered FROM birds_new;
++---------+------------+
+| bird_id | endangered |
++---------+------------+
+|       1 |            |
+|       2 |            |
+|       3 |           |
+|       4 |            |
+|       5 |            |
+|       6 |           |
++---------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM birds_new;
++---------+----------------------+-------------------------+-----------+---------+---------+---------+------------+-------------+
+| bird_id | scientific_name      | common_name             | family_id | wing_id | body_id | bill_id | endangered | description |
++---------+----------------------+-------------------------+-----------+---------+---------+---------+------------+-------------+
+|       1 | Charadrius vociferus | Killdeer                |      NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       2 | Gavia immer          | Great Northern Loon     |      NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       3 | Aix sponsa           | Wood Duck               |      NULL | NULL    | NULL    | NULL    |           | NULL        |
+|       4 | Chordeiles minor     | Common Nighthawk        |      NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       5 | Sitta carolinensis   | Ehite-breasted Nuthatch |      NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       6 | Apreryx mantelli     | North Island Brown Kiwi |      NULL | NULL    | NULL    | NULL    |           | NULL        |
++---------+----------------------+-------------------------+-----------+---------+---------+---------+------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT bird_id, scientific_name, common_name
+    -> FROM birds_new
+    -> WHERE endangered \G
+*************************** 1. row ***************************
+        bird_id: 3
+scientific_name: Aix sponsa
+    common_name: Wood Duck
+*************************** 2. row ***************************
+        bird_id: 6
+scientific_name: Apreryx mantelli
+    common_name: North Island Brown Kiwi
+2 rows in set (0.00 sec)
+
+mysql> SELECT bird_id, scientific_name, common_name
+    -> FROM birds_new
+    -> WHERE endangered;
++---------+------------------+-------------------------+
+| bird_id | scientific_name  | common_name             |
++---------+------------------+-------------------------+
+|       3 | Aix sponsa       | Wood Duck               |
+|       6 | Apreryx mantelli | North Island Brown Kiwi |
++---------+------------------+-------------------------+
+2 rows in set (0.00 sec)
+
+mysql> 

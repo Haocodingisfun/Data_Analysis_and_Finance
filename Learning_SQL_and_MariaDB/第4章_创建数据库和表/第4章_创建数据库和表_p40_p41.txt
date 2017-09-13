@@ -1,0 +1,359 @@
+Last login: Wed Sep 13 14:00:40 on ttys000
+HF:~ wonderful$ alias mysql=/usr/local/mysql/bin/mysql
+HF:~ wonderful$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1479
+Server version: 5.7.19 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| birdwatchers       |
+| mysql              |
+| performance_schema |
+| rookery            |
+| sys                |
+| test               |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> DROP rookery.bird_orders;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rookery.bird_orders' at line 1
+mysql> USE rookery  
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_rookery |
++-------------------+
+| bird_families     |
+| bird_orders       |
+| birds             |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> DROP bird_orders;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'bird_orders' at line 1
+mysql> DROP TABLE bird_orders;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATET TABLE bird_orders (
+    -> \c
+mysql> CREATE TABLE bird_orders (order_id INT AUTO_INCREMENT PRIMARY KEY,
+    -> scientific_name VARCHAR(255) UNIQUE,
+    -> brief_description TEXT,
+    -> order_image BLOB )
+    -> DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DESCRIBE bird_orders;
++-------------------+--------------+------+-----+---------+----------------+
+| Field             | Type         | Null | Key | Default | Extra          |
++-------------------+--------------+------+-----+---------+----------------+
+| order_id          | int(11)      | NO   | PRI | NULL    | auto_increment |
+| scientific_name   | varchar(255) | YES  | UNI | NULL    |                |
+| brief_description | text         | YES  |     | NULL    |                |
+| order_image       | blob         | YES  |     | NULL    |                |
++-------------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> CREATE TABLE birds_wing_shapes (
+    -> wing_id CHAR(2),
+    -> \c
+mysql> CREATE TABLE birds_wing_shapes (
+    -> wing_id CHAR(2) UNIQUE,
+    -> wing_shape CHAR(25),
+    -> wing_example BLOB );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SHOW CREATE TABLE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> SHOW CREATE TABLE birds_wing_shapes;
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table             | Create Table                                                                                                                                                                                                                                                         |
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| birds_wing_shapes | CREATE TABLE `birds_wing_shapes` (
+  `wing_id` char(2) COLLATE latin1_bin DEFAULT NULL,
+  `wing_shape` char(25) COLLATE latin1_bin DEFAULT NULL,
+  `wing_example` blob,
+  UNIQUE KEY `wing_id` (`wing_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin |
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE birds_wing_shapes \G
+*************************** 1. row ***************************
+       Table: birds_wing_shapes
+Create Table: CREATE TABLE `birds_wing_shapes` (
+  `wing_id` char(2) COLLATE latin1_bin DEFAULT NULL,
+  `wing_shape` char(25) COLLATE latin1_bin DEFAULT NULL,
+  `wing_example` blob,
+  UNIQUE KEY `wing_id` (`wing_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin
+1 row in set (0.00 sec)
+
+mysql> DROP TABLE birds_wing_shapes;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> Create Table: CREATE TABLE `birds_wing_shapes` (
+    ->   `wing_id` char(2) COLLATE latin1_bin DEFAULT NULL,
+    ->   `wing_shape` char(25) COLLATE latin1_bin DEFAULT NULL,
+    ->   `wing_example` blob,
+    ->   UNIQUE KEY `wing_id` (`wing_id`)
+    -> ) ENGINE=MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ': CREATE TABLE `birds_wing_shapes` (
+  `wing_id` char(2) COLLATE latin1_bin DEFA' at line 1
+mysql> Create Table: CREATE TABLE `birds_wing_shapes` (
+    ->   `wing_id` char(2) COLLATE utf8 DEFAULT NULL,
+    ->   `wing_shape` char(25) COLLATE utf8 DEFAULT NULL,
+    ->   `wing_example` blob,
+    ->   UNIQUE KEY `wing_id` (`wing_id`)
+    -> ) ENGINE=MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ': CREATE TABLE `birds_wing_shapes` (
+  `wing_id` char(2) COLLATE utf8 DEFAULT NU' at line 1
+mysql> Create Table: CREATE TABLE `birds_wing_shapes` (
+    ->   `wing_id` char(2) COLLATE utf8 DEFAULT NULL,
+    ->   `wing_shape` char(25) COLLATE utf8 DEFAULT NULL,
+    ->   `wing_example` blob,
+    ->   UNIQUE KEY `wing_id` (`wing_id`)
+    -> ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ': CREATE TABLE `birds_wing_shapes` (
+  `wing_id` char(2) COLLATE utf8 DEFAULT NU' at line 1
+mysql> CREATE TABLE `birds_wing_shapes` (
+    ->   `wing_id` char(2) COLLATE utf8 DEFAULT NULL,
+    ->   `wing_shape` char(25) COLLATE utf8 DEFAULT NULL,
+    ->   `wing_example` blob,
+    ->   UNIQUE KEY `wing_id` (`wing_id`)
+    -> ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+ERROR 1273 (HY000): Unknown collation: 'utf8'
+mysql> CREATE TABLE `birds_wing_shapes` (
+    ->   `wing_id` char(2) COLLATE utf8 DEFAULT NULL,
+    ->   `wing_shape` char(25) COLLATE utf8 DEFAULT NULL,
+    ->   `wing_example` blob,
+    ->   UNIQUE KEY `wing_id` (`wing_id`)
+    -> ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+ERROR 1273 (HY000): Unknown collation: 'utf8'
+mysql> CREATE TABLE `birds_wing_shapes` (
+    ->   `wing_id` char(2) COLLATE utf8 DEFAULT NULL,
+    ->   `wing_shape` char(25) COLLATE utf8 DEFAULT NULL,
+    ->   `wing_example` blob,
+    ->   UNIQUE KEY `wing_id` (`wing_id`)
+    -> ) ENGINE=MyISAM;
+ERROR 1273 (HY000): Unknown collation: 'utf8'
+mysql> CREATE TABLE `birds_wing_shapes` (
+    ->   `wing_id` char(2) COLLATE utf8_general_ci DEFAULT NULL,
+    ->   `wing_shape` char(25) COLLATE utf8_general_ci DEFAULT NULL,
+    ->   `wing_example` blob,
+    ->   UNIQUE KEY `wing_id` (`wing_id`)
+    -> ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DESCRIBE birds_wing_shapes;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| wing_id      | char(2)  | YES  | UNI | NULL    |       |
+| wing_shape   | char(25) | YES  |     | NULL    |       |
+| wing_example | blob     | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE birds_body_shapes (
+    -> body_id CHAR(3) UNIQUE,
+    -> body_shape CHAR(25),
+    -> body_exampe BLOB );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> SHOW CREATE TABLE birds_body_shapes;
++-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table             | Create Table                                                                                                                                                                                                                                                        |
++-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| birds_body_shapes | CREATE TABLE `birds_body_shapes` (
+  `body_id` char(3) COLLATE latin1_bin DEFAULT NULL,
+  `body_shape` char(25) COLLATE latin1_bin DEFAULT NULL,
+  `body_exampe` blob,
+  UNIQUE KEY `body_id` (`body_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin |
++-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE birds_body_shapes \G
+*************************** 1. row ***************************
+       Table: birds_body_shapes
+Create Table: CREATE TABLE `birds_body_shapes` (
+  `body_id` char(3) COLLATE latin1_bin DEFAULT NULL,
+  `body_shape` char(25) COLLATE latin1_bin DEFAULT NULL,
+  `body_exampe` blob,
+  UNIQUE KEY `body_id` (`body_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin
+1 row in set (0.00 sec)
+
+mysql> CREATE TABLE birds_bill_shapes (
+    -> bill_id CHAR(2) UNIQUE,
+    -> bill_shape CHAR(25),
+    -> bill_example BLOB,
+    -> \c
+mysql> DROP TABLE birds_wing_shapes;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE TABLE birds_body_shapes (
+    -> Create Table: CREATE TABLE `birds_body_shapes` (
+    ->   `body_id` char(3) COLLATE utf8_general_ci DEFAULT NULL,
+    ->   `body_shape` char(25) COLLATE utf8_general_ci DEFAULT NULL,
+    ->   `body_exampe` blob,
+    ->   UNIQUE KEY `body_id` (`body_id`)
+    -> ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COLLATE=utf8_general_ci;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Create Table: CREATE TABLE `birds_body_shapes` (
+  `body_id` char(3) COLLATE utf' at line 2
+mysql> CREATE TABLE `birds_body_shapes` (
+    ->   `body_id` char(3) COLLATE utf8_general_ci DEFAULT NULL,
+    ->   `body_shape` char(25) COLLATE utf8_general_ci DEFAULT NULL,
+    ->   `body_exampe` blob,
+    ->   UNIQUE KEY `body_id` (`body_id`)
+    -> ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COLLATE=utf8_general_ci;
+ERROR 1050 (42S01): Table 'birds_body_shapes' already exists
+mysql> DREOP TABLE birds_body_shapes
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DREOP TABLE birds_body_shapes' at line 1
+mysql> DROP TABLE birds_body_shapes;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> Create Table: CREATE TABLE `birds_body_shapes` (
+    ->   `body_id` char(3) COLLATE utf8_general_ci DEFAULT NULL,
+    ->   `body_shape` char(25) COLLATE utf8_general_ci DEFAULT NULL,
+    ->   `body_exampe` blob,
+    ->   UNIQUE KEY `body_id` (`body_id`)
+    -> ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COLLATE=utf8_general_ci;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ': CREATE TABLE `birds_body_shapes` (
+  `body_id` char(3) COLLATE utf8_general_ci' at line 1
+mysql> CREATE TABLE `birds_body_shapes` (
+    ->   `body_id` char(3) COLLATE utf8_general_ci DEFAULT NULL,
+    ->   `body_shape` char(25) COLLATE utf8_general_ci DEFAULT NULL,
+    ->   `body_exampe` blob,
+    ->   UNIQUE KEY `body_id` (`body_id`)
+    -> ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 COLLATE=utf8_general_ci;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE birds_bill_shapes (
+    -> bill_id CHAR(2) CLOOATE utf8_general_ci UNIQUE,
+    -> bill_shaoe CHAR(25）CLOOATE utf8_general_ci,
+    -> bill_example BLOB,
+    -> ) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_general_ci;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CLOOATE utf8_general_ci UNIQUE,
+bill_shaoe CHAR(25）CLOOATE utf8_general_ci,
+bi' at line 2
+mysql> CREATE TABLE birds_bill_shapes (
+    -> bill_id CHAR(2) CLOOATE utf8_general_ci UNIQUE,
+    -> bill_shape CHAR(25）CLOOATE utf8_general_ci,
+    -> bill_example BLOB
+    -> ) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_general_ci;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CLOOATE utf8_general_ci UNIQUE,
+bill_shape CHAR(25）CLOOATE utf8_general_ci,
+bi' at line 2
+mysql> CREATE TABLE birds_bill_shapes (
+    -> bill_id CHAR(2) UNIQUE,
+    -> bill_shape CHAR(25),
+    -> bill_example BLOB
+    -> ) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_general_ci;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DROP TABLE birds_body_shapes;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE `birds_body_shapes` (
+    ->   `body_id` char(3) COLLATE utf8_general_ci DEFAULT NULL,
+    ->   `body_shape` char(25) COLLATE utf8_general_ci DEFAULT NULL,
+    ->   `body_exampe` blob,
+    ->   UNIQUE KEY `body_id` (`body_id`)
+    -> ) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_general_ci;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_rookery |
++-------------------+
+| bird_families     |
+| bird_orders       |
+| birds             |
+| birds_bill_shapes |
+| birds_body_shapes |
++-------------------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE `birds_wing_shapes` (
+    ->     ->   `wing_id` char(2) COLLATE utf8_general_ci DEFAULT NULL,
+    ->     ->   `wing_shape` char(25) COLLATE utf8_general_ci DEFAULT NULL,
+    ->     ->   `wing_example` blob,
+    ->     ->   UNIQUE KEY `wing_id` (`wing_id`)
+    ->     -> ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '->   `wing_id` char(2) COLLATE utf8_general_ci DEFAULT NULL,
+    ->   `wing_shap' at line 2
+mysql> CREATE TABLE `birds_wing_shapes` (
+    ->   `wing_id` char(2) COLLATE utf8_general_ci DEFAULT NULL,
+    ->   `wing_shape` char(25) COLLATE utf8_general_ci DEFAULT NULL,
+    ->   `wing_example` blob,
+    ->   UNIQUE KEY `wing_id` (`wing_id`)
+    -> ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_rookery |
++-------------------+
+| bird_families     |
+| bird_orders       |
+| birds             |
+| birds_bill_shapes |
+| birds_body_shapes |
+| birds_wing_shapes |
++-------------------+
+6 rows in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE birds_bill_shapes \G
+*************************** 1. row ***************************
+       Table: birds_bill_shapes
+Create Table: CREATE TABLE `birds_bill_shapes` (
+  `bill_id` char(2) DEFAULT NULL,
+  `bill_shape` char(25) DEFAULT NULL,
+  `bill_example` blob,
+  UNIQUE KEY `bill_id` (`bill_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
+1 row in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE birds_body_shapes \G
+*************************** 1. row ***************************
+       Table: birds_body_shapes
+Create Table: CREATE TABLE `birds_body_shapes` (
+  `body_id` char(3) DEFAULT NULL,
+  `body_shape` char(25) DEFAULT NULL,
+  `body_exampe` blob,
+  UNIQUE KEY `body_id` (`body_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
+1 row in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE birds_wing_shapes \G
+*************************** 1. row ***************************
+       Table: birds_wing_shapes
+Create Table: CREATE TABLE `birds_wing_shapes` (
+  `wing_id` char(2) DEFAULT NULL,
+  `wing_shape` char(25) DEFAULT NULL,
+  `wing_example` blob,
+  UNIQUE KEY `wing_id` (`wing_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
+1 row in set (0.00 sec)
+
+mysql> 
