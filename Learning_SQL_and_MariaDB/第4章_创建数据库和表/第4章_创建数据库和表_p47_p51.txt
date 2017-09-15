@@ -1,0 +1,344 @@
+Last login: Thu Sep 14 09:04:59 on ttys000
+HF:~ wonderful$ alias mysql=/usr/local/mysql/bin/mysql
+HF:~ wonderful$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 299
+Server version: 5.7.19 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| birdwatchers       |
+| mysql              |
+| performance_schema |
+| rookery            |
+| sys                |
+| test               |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> USE test
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SHOW TABLES;
++----------------+
+| Tables_in_test |
++----------------+
+| birds_new      |
+| book           |
+| contacts       |
+| relation_types |
+| status_names   |
++----------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM birds_new;
++---------+----------------------+-------------------------+-----------+---------+---------+---------+------------+-------------+
+| bird_id | scientific_name      | common_name             | family_id | wing_id | body_id | bill_id | endangered | description |
++---------+----------------------+-------------------------+-----------+---------+---------+---------+------------+-------------+
+|       1 | Charadrius vociferus | Killdeer                |      NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       2 | Gavia immer          | Great Northern Loon     |      NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       3 | Aix sponsa           | Wood Duck               |      NULL | NULL    | NULL    | NULL    |           | NULL        |
+|       4 | Chordeiles minor     | Common Nighthawk        |      NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       5 | Sitta carolinensis   | Ehite-breasted Nuthatch |      NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       6 | Apreryx mantelli     | North Island Brown Kiwi |      NULL | NULL    | NULL    | NULL    |           | NULL        |
++---------+----------------------+-------------------------+-----------+---------+---------+---------+------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT bird_id, scientific_name, common_name
+    -> FROM birds_new
+    -> WHERE endangered \G
+*************************** 1. row ***************************
+        bird_id: 3
+scientific_name: Aix sponsa
+    common_name: Wood Duck
+*************************** 2. row ***************************
+        bird_id: 6
+scientific_name: Apreryx mantelli
+    common_name: North Island Brown Kiwi
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM birds_new
+    -> WHERE NOT endangered \G
+*************************** 1. row ***************************
+        bird_id: 1
+scientific_name: Charadrius vociferus
+    common_name: Killdeer
+      family_id: NULL
+        wing_id: NULL
+        body_id: NULL
+        bill_id: NULL
+     endangered:  
+    description: NULL
+*************************** 2. row ***************************
+        bird_id: 2
+scientific_name: Gavia immer
+    common_name: Great Northern Loon
+      family_id: NULL
+        wing_id: NULL
+        body_id: NULL
+        bill_id: NULL
+     endangered:  
+    description: NULL
+*************************** 3. row ***************************
+        bird_id: 4
+scientific_name: Chordeiles minor
+    common_name: Common Nighthawk
+      family_id: NULL
+        wing_id: NULL
+        body_id: NULL
+        bill_id: NULL
+     endangered:  
+    description: NULL
+*************************** 4. row ***************************
+        bird_id: 5
+scientific_name: Sitta carolinensis
+    common_name: Ehite-breasted Nuthatch
+      family_id: NULL
+        wing_id: NULL
+        body_id: NULL
+        bill_id: NULL
+     endangered:  
+    description: NULL
+4 rows in set (0.01 sec)
+
+mysql> ALTER TABLE birds_new
+    -> MODIFY COLUMN endangered
+    -> ENUM('Extinct],
+    '> \c
+    '> '
+    -> \c
+mysql> ALTER TABLE birds_new
+    -> MODIFY COLUMN endangered
+    -> ENUM('Extinct',
+    -> 'Exinct in Wild',
+    -> 'Threatened - Critically Endangered',
+    -> 'Threatened - Endangered',
+    -> 'Threatened - Vulnerable',
+    -> 'Low Risk - Conercation Development',
+    -> 'Low Risk - Near Threatened',
+    -> 'Low Risk - Least Concern')
+    -> AFTER family_id;
+ERROR 1265 (01000): Data truncated for column 'endangered' at row 1
+mysql> SELECT * FROM birds_new;
++---------+----------------------+-------------------------+-----------+---------+---------+---------+------------+-------------+
+| bird_id | scientific_name      | common_name             | family_id | wing_id | body_id | bill_id | endangered | description |
++---------+----------------------+-------------------------+-----------+---------+---------+---------+------------+-------------+
+|       1 | Charadrius vociferus | Killdeer                |      NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       2 | Gavia immer          | Great Northern Loon     |      NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       3 | Aix sponsa           | Wood Duck               |      NULL | NULL    | NULL    | NULL    |           | NULL        |
+|       4 | Chordeiles minor     | Common Nighthawk        |      NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       5 | Sitta carolinensis   | Ehite-breasted Nuthatch |      NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       6 | Apreryx mantelli     | North Island Brown Kiwi |      NULL | NULL    | NULL    | NULL    |           | NULL        |
++---------+----------------------+-------------------------+-----------+---------+---------+---------+------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> ALTER TABLE birds_new
+    -> MODIFY COLUMN endangered
+    -> ENUM('Extinct',
+    -> 'Exinct in Wild',
+    -> 'Threatened - Critically Endangered',
+    -> 'Threatened - Endangered',
+    -> 'Threatened - Vulnerable',
+    -> 'Lower Risk - Conercation Development',
+    -> 'Lower Risk - Near Threatened',
+    -> 'Lower Risk - Least Concern')
+    -> AFTER family_id;
+ERROR 1265 (01000): Data truncated for column 'endangered' at row 1
+mysql> SHOW COLUMNS FROM birds_new LIKE 'endangered' \G
+*************************** 1. row ***************************
+  Field: endangered
+   Type: bit(1)
+   Null: YES
+    Key: 
+Default: b'1'
+  Extra: 
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE birds_new
+    -> MODIFY COLUMN endangered
+    -> ENUM('Extinct',
+    -> 'Exinct in Wild')
+    -> AFTER family_id;
+ERROR 1265 (01000): Data truncated for column 'endangered' at row 1
+mysql> ALTER TABLE birds_new
+    -> MODIFY COLUMN endangered
+    -> ENUM('Extinct')
+    -> AFTER family_id;
+ERROR 1265 (01000): Data truncated for column 'endangered' at row 1
+mysql> ALTER TABLE birds_new
+    -> MODIFY COLUMN endangered
+    -> ENUM('E')
+    -> AFTER family_id;
+ERROR 1265 (01000): Data truncated for column 'endangered' at row 1
+mysql> ALTER TABLE birds_new
+    -> ADD COLUMN test CHAR(225) AFTER family_id;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM birds_new;
++---------+----------------------+-------------------------+-----------+------+---------+---------+---------+------------+-------------+
+| bird_id | scientific_name      | common_name             | family_id | test | wing_id | body_id | bill_id | endangered | description |
++---------+----------------------+-------------------------+-----------+------+---------+---------+---------+------------+-------------+
+|       1 | Charadrius vociferus | Killdeer                |      NULL | NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       2 | Gavia immer          | Great Northern Loon     |      NULL | NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       3 | Aix sponsa           | Wood Duck               |      NULL | NULL | NULL    | NULL    | NULL    |           | NULL        |
+|       4 | Chordeiles minor     | Common Nighthawk        |      NULL | NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       5 | Sitta carolinensis   | Ehite-breasted Nuthatch |      NULL | NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       6 | Apreryx mantelli     | North Island Brown Kiwi |      NULL | NULL | NULL    | NULL    | NULL    |           | NULL        |
++---------+----------------------+-------------------------+-----------+------+---------+---------+---------+------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> ALTER TABLE birds_new
+    -> MODIFY COLUMN endangered
+    -> ENUM('Extinct',
+    -> 'Threatened - Critically Endangered',
+    -> 'Threatened - Endangered',
+    -> 'Threatened - Vulnerable',
+    -> 'Lower Risk - Conercation Development',
+    -> 'Lower Risk - Near Threatened',
+    -> 'Lower Risk - Least Concern')
+    -> AFTER family_id;
+ERROR 1265 (01000): Data truncated for column 'endangered' at row 1
+mysql> ALTER TABLE birds_new
+    -> MODIFY COLUMN test
+    -> ENUM('Extinct',
+    -> 'Threatened - Critically Endangered',
+    -> 'Threatened - Endangered',
+    -> 'Threatened - Vulnerable',
+    -> 'Lower Risk - Conercation Development',
+    -> 'Lower Risk - Near Threatened',
+    -> 'Lower Risk - Least Concern')
+    -> AFTER family_id;
+Query OK, 6 rows affected (0.02 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM birds_new;
++---------+----------------------+-------------------------+-----------+------+---------+---------+---------+------------+-------------+
+| bird_id | scientific_name      | common_name             | family_id | test | wing_id | body_id | bill_id | endangered | description |
++---------+----------------------+-------------------------+-----------+------+---------+---------+---------+------------+-------------+
+|       1 | Charadrius vociferus | Killdeer                |      NULL | NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       2 | Gavia immer          | Great Northern Loon     |      NULL | NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       3 | Aix sponsa           | Wood Duck               |      NULL | NULL | NULL    | NULL    | NULL    |           | NULL        |
+|       4 | Chordeiles minor     | Common Nighthawk        |      NULL | NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       5 | Sitta carolinensis   | Ehite-breasted Nuthatch |      NULL | NULL | NULL    | NULL    | NULL    |            | NULL        |
+|       6 | Apreryx mantelli     | North Island Brown Kiwi |      NULL | NULL | NULL    | NULL    | NULL    |           | NULL        |
++---------+----------------------+-------------------------+-----------+------+---------+---------+---------+------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> SHOW COLUMNS FROM birds_new LIKE 'endangered' \G
+*************************** 1. row ***************************
+  Field: endangered
+   Type: bit(1)
+   Null: YES
+    Key: 
+Default: b'1'
+  Extra: 
+1 row in set (0.00 sec)
+
+mysql> SHOW COLUMNS FROM birds_new LIKE 'test' \G
+*************************** 1. row ***************************
+  Field: test
+   Type: enum('Extinct','Threatened - Critically Endangered','Threatened - Endangered','Threatened - Vulnerable','Lower Risk - Conercation Development','Lower Risk - Near Threatened','Lower Risk - Least Concern')
+   Null: YES
+    Key: 
+Default: NULL
+  Extra: 
+1 row in set (0.00 sec)
+
+mysql> UPDATE birds_new
+    -> SET test = 7;
+Query OK, 6 rows affected (0.01 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+mysql> SELECT * FROM birds_new;
++---------+----------------------+-------------------------+-----------+----------------------------+---------+---------+---------+------------+-------------+
+| bird_id | scientific_name      | common_name             | family_id | test                       | wing_id | body_id | bill_id | endangered | description |
++---------+----------------------+-------------------------+-----------+----------------------------+---------+---------+---------+------------+-------------+
+|       1 | Charadrius vociferus | Killdeer                |      NULL | Lower Risk - Least Concern | NULL    | NULL    | NULL    |            | NULL        |
+|       2 | Gavia immer          | Great Northern Loon     |      NULL | Lower Risk - Least Concern | NULL    | NULL    | NULL    |            | NULL        |
+|       3 | Aix sponsa           | Wood Duck               |      NULL | Lower Risk - Least Concern | NULL    | NULL    | NULL    |           | NULL        |
+|       4 | Chordeiles minor     | Common Nighthawk        |      NULL | Lower Risk - Least Concern | NULL    | NULL    | NULL    |            | NULL        |
+|       5 | Sitta carolinensis   | Ehite-breasted Nuthatch |      NULL | Lower Risk - Least Concern | NULL    | NULL    | NULL    |            | NULL        |
+|       6 | Apreryx mantelli     | North Island Brown Kiwi |      NULL | Lower Risk - Least Concern | NULL    | NULL    | NULL    |           | NULL        |
++---------+----------------------+-------------------------+-----------+----------------------------+---------+---------+---------+------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> USE birdsatchers;
+ERROR 1049 (42000): Unknown database 'birdsatchers'
+mysql> USE birdwatchers;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> CREATE TABLE surveys
+    -> (survey_id INT AUTO_INCREMENT KEY,
+    -> survey_name VARCHAR(255));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE survey_questions
+    -> (question_id INT AUTO_INCREMENT KEY,
+    -> survey_id INT,
+    -> question VARCHAR(255),
+    -> choices BLOB);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE survey_answers
+    -> (answer_id INT AUTO_INCREMENT KEY,
+    -> human_id INT,
+    -> question_id INT,
+    -> date_answered DATETIME,
+    -> answer CARCHAR(255));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CARCHAR(255))' at line 6
+mysql> CREATE TABLE survey_answers
+    -> (answer_id INT AUTO_INCREMENT KEY,
+    -> human_id INT,
+    -> question_id INT,
+    -> date_answered DATETIME,
+    -> answer VARCHAR(255));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> INSERT INTO surveys (survey name)
+    -> VALUES ('Favorite Birding Location');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'name)
+VALUES ('Favorite Birding Location')' at line 1
+mysql> INSERT INTO surveys (survey_name)
+    -> VALUES ('Favorite Birding Location');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO survey_questions
+    -> (survey_id, question, choices)
+    -> VALUES (LAST_INSERT_ID(),
+    -> "What's your favourite setting for bird-watching?",
+    -> COLUMN_CREATE ('1', 'forest, '2', 'shore', '3', 'backyard') );
+    '> 
+    '> ;
+    '> '
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2', 'shore', '3', 'backyard') );
+
+;
+'' at line 5
+mysql> INSERT INTO survey_questions
+    -> (survey_id, question, choices)
+    ->  VALUES (LAST_INSERT_ID(),
+    -> "What's your favourite setting for bird-watching?",
+    -> COLUMN_CREATE('1', 'forest, '2', 'shore', '3', 'backyard') );
+    '> '
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2', 'shore', '3', 'backyard') );
+'' at line 5
+mysql> 
